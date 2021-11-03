@@ -6,5 +6,5 @@
 
 ***
 ### Задание №2 - Описание жизненного цикла задачи (разработки нового функционала)
-![Описание жизненного цикла](https://github.com/Bura-M/devops-netology/tree/main/01-intro-01/img/list.png)
+![Описание жизненного цикла](https://github.com/Bura-M/devops-netology/blob/main/01-intro-01/img/list.png)
 
