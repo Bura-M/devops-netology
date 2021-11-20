@@ -1,14 +1,18 @@
 # Домашнее задание к занятию "3.1. Работа в терминале, лекция 1"  
 ***
 
-1. Установка VirtualBox 6.1.26  
-2. Установка Vagrant 2.2.19  
-3. Отключение Hyper-V  
+###1. Установка VirtualBox 6.1.26  
+
+###2. Установка Vagrant 2.2.19  
+
+###3. Отключение Hyper-V  
 Команды в PowerShell:  
 	Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 	.\bcdedit.exe /set hypervisorlaunchtype off
-3. vagrant init  
-4. Содержимое файла конфигурации VagrantFile:
+
+###3. vagrant init  
+
+###4. Содержимое файла конфигурации VagrantFile:
 	Vagrant.configure("2") do |config|
 		config.vm.box = "bento/ubuntu-20.04"
 		config.vm.provider "virtualbox" do |v|
@@ -18,16 +22,19 @@
 		end
 	end
 
-"Ознакомьтесь с графическим интерфейсом VirtualBox, посмотрите как выглядит виртуальная машина,  
-которую создал для вас Vagrant, какие аппаратные ресурсы ей выделены. Какие ресурсы выделены по-умолчанию?"  
-RAM:1024mb  
-CPU:1 cpu  
-HDD:64gb  
-video:8mb  
+######"Ознакомьтесь с графическим интерфейсом VirtualBox, посмотрите как выглядит виртуальная машина,  
+######которую создал для вас Vagrant, какие аппаратные ресурсы ей выделены. Какие ресурсы выделены по-умолчанию?"  
+	RAM:1024mb  
+	CPU:1 cpu  
+	HDD:64gb  
+	video:8mb  
 
-5. vagrant up  
-6. vagrant ssh  
-7. Ознакомиться с разделами man bash, почитать о настройках самого bash:  
+###5. vagrant up  
+
+###6. vagrant ssh  
+![Вывод команды vagrant ssh](https://github.com/Bura-M/devops-netology/blob/main/03-sysadmin-01-terminal/img/vagrant_ssh.PNG "vagrant ssh")  
+
+###7. Ознакомиться с разделами man bash, почитать о настройках самого bash:  
 - какой переменной можно задать длину журнала history, и на какой строчке manual это описывается?  
 HISTSIZE — количество команд, которые необходимо запоминать в списке истории (по умолчанию — 500); - 807 Строка  
 
@@ -51,7 +58,7 @@ ignoreboth - сочетает действие опций ignorespace и ignored
 	 The second and subsequent lines of a multi-line compound command are not tested, and are added  to  the
          history regardless of the value of HISTCONTROL.
 			  
-8. В каких сценариях использования применимы скобки {} и на какой строчке man bash это описано? - Строка 202  
+###8. В каких сценариях использования применимы скобки {} и на какой строчке man bash это описано? - Строка 202  
 {} -  зарезервированные слова, список, список команд в отличии от ") исполнятся в текущей среде интерпретара,  
 используется в различных условных циклах, условных операторах, или ограничивает тело функции. В командах выполняет  
 подстановку элементов из списка, например,конструкция a{d,c,b}e заменяется на 'ade ace abe'.  
@@ -63,12 +70,14 @@ ignoreboth - сочетает действие опций ignorespace и ignored
          permitted  to be recognized.  Since they do not cause a word break, they must be separated from list by
          whitespace or another shell metacharacter.
 			  
-9. Основываясь на предыдущем вопросе, как создать однократным вызовом touch 100000 файлов? А получилось ли создать 300000?  
+###9. Основываясь на предыдущем вопросе, как создать однократным вызовом touch 100000 файлов? А получилось ли создать 300000?  
 Если нет, то почему?Основываясь на предыдущем вопросе, как создать однократным вызовом touch 100000 файлов?  
 А получилось ли создать 300000? Если нет, то почему?  
-	touch {00001..10000}.txt или touch {00001..30000}.txt - создаст 10000/30000 файлов
+	touch {00001..10000}.txt или touch {00001..30000}.txt - создаст 10000/30000 файлов  
 
-10. В man bash поищите по /\[\[. Что делает конструкция [[ -d /tmp ]]?  
+![Команда touch](https://github.com/Bura-M/devops-netology/blob/main/03-sysadmin-01-terminal/img/touch_30000.PNG "touch")
+
+###10. В man bash поищите по /\[\[. Что делает конструкция [[ -d /tmp ]]?  
 [[ -d /tmp ]] - возвращает статус условия в '-d /tmp' равное 0 или 1. 1 - папка существует.  
 
 	[[ expression ]]
@@ -84,18 +93,18 @@ ignoreboth - сочетает действие опций ignorespace и ignored
          -d file
          True if file exists and is a directory.
 			  
-11. Основываясь на знаниях о просмотре текущих (например, PATH) и установке новых переменных; командах,  
+###11. Основываясь на знаниях о просмотре текущих (например, PATH) и установке новых переменных; командах,  
 которые мы рассматривали, добейтесь в выводе type -a bash в виртуальной машине наличия первым пунктом в списке:  
-	vagrant@vagrant:~$ mkdir /tmp/new_path_directory
-	vagrant@vagrant:~$ cp /bin/bash /tmp/new_path_directory/
-	vagrant@vagrant:~$ PATH=/tmp/new_path_directory:$PATH
-	vagrant@vagrant:~$ type -a bash
-	bash is /tmp/new_path_directory/bash
-	bash is /usr/bin/bash
-	bash is /bin/bash
+	vagrant@vagrant:~$ mkdir /tmp/new_path_directory  
+	vagrant@vagrant:~$ cp /bin/bash /tmp/new_path_directory/  
+	vagrant@vagrant:~$ PATH=/tmp/new_path_directory:$PATH  
+	vagrant@vagrant:~$ type -a bash  
+	bash is /tmp/new_path_directory/bash  
+	bash is /usr/bin/bash  
+	bash is /bin/bash  
 
-12. Чем отличается планирование команд с помощью batch и at?  
+###12. Чем отличается планирование команд с помощью batch и at?  
 Команда at используется для назначения одноразового задания на заданное время,  
 а команда batch — для назначения одноразовых задач, которые должны выполняться, когда загрузка системы становится меньше 0,8.  
 
-13. vagrant suspend  
+###13. vagrant suspend  
