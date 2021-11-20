@@ -7,8 +7,8 @@
 
 ### 3. Отключение Hyper-V
 Команды в PowerShell:  
-	Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
-	.\bcdedit.exe /set hypervisorlaunchtype off
+	Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All  
+	.\bcdedit.exe /set hypervisorlaunchtype off  
 
 ### 4. vagrant init
 
