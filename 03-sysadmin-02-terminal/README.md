@@ -25,10 +25,10 @@ cat <input.txt >output.txt
 
 #### 6. Получится ли находясь в графическом режиме, вывести данные из PTY в какой-либо из эмуляторов TTY? Сможете ли вы наблюдать выводимые данные?  
 Попробовала:  
-	vagrant@vagrant:~$ who  
+	vagrant@vagrant:$ who  
 	vagrant  pts/0        2021-11-25 15:48 (10.0.2.2)  
 	vagrant  pts/1        2021-11-25 17:11 (10.0.2.2)  
-	vagrant@vagrant:~$ echo Hello >/dev/tty1  
+	vagrant@vagrant:$ echo Hello >/dev/tty1  
 	-bash: /dev/tty1: Permission denied  
 
 #### 7. Выполните команду bash 5>&1. К чему она приведет? Что будет, если вы выполните echo netology > /proc/$$/fd/5? Почему так происходит?
