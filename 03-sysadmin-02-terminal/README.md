@@ -28,8 +28,7 @@ cat <input.txt >output.txt
 	vagrant@vagrant:$ who  
 	vagrant  pts/0        2021-11-25 15:48 (10.0.2.2)  
 	vagrant  pts/1        2021-11-25 17:11 (10.0.2.2)  
-	vagrant@vagrant:$ echo Hello >/dev/tty1  
-	-bash: /dev/tty1: Permission denied  
+	vagrant@vagrant:$ echo Hello >/dev/tty1   
 
 #### 7. Выполните команду bash 5>&1. К чему она приведет? Что будет, если вы выполните echo netology > /proc/$$/fd/5? Почему так происходит?
 5>&1 в командной строке текущего сеанса создаст новый файловый дескриптор "5" и перенаправит его в "1", т.е. в stdout.  
@@ -71,6 +70,11 @@ man procfs
 Не очень поняла, что нужно сделать. Поэтому как-то так:  
 ![Выполнение screen](https://github.com/Bura-M/devops-netology/blob/main/03-sysadmin-02-terminal/img/screen.PNG "screen nano")  
 ![После выполнения screen](https://github.com/Bura-M/devops-netology/blob/main/03-sysadmin-02-terminal/img/after_screen.PNG "after screen nano")  
+
+Далее нашла ответы коллег:  
+	1. Изменить значение kernel.yama.ptrace_scope на 0 /etc/sysctl.d/10-ptrace.conf.  
+	2. Перезагрузить ВМ: vagrant reload.  
+	3. sudo reptyr -T [PID].  
 
 #### 14. sudo echo string > /root/new_file не даст выполнить перенаправление под обычным пользователем, так как перенаправлением занимается процесс shell'а, который запущен без sudo под вашим пользователем. Для решения данной проблемы можно использовать конструкцию echo string | sudo tee /root/new_file. Узнайте что делает команда tee и почему в отличие от sudo echo команда с sudo tee будет работать.  
 Перенаправление вывода выполняется оболочкой, из которой была вызвана команда. По порядку происходит:  
