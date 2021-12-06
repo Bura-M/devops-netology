@@ -33,9 +33,9 @@ auditd     1587                           root    5w      REG              253,0
 или  
 	sudo find /proc/1587/fd -ls | grep  '(deleted)'  
 
-Далее:	
+Далее  
 	echo -n >/proc/1587/fd/5
-или (если вариант выше выдал Permission Denied)
+или (если вариант выше выдал Permission Denied)  
 	echo -n | sudo tee /proc/1587/fd/5
 
 ### 4. Занимают ли зомби-процессы какие-то ресурсы в ОС (CPU, RAM, IO)?
