@@ -2,12 +2,30 @@
 ***
 
 ### 1. На лекции мы познакомились с node_exporter. В демонстрации его исполняемый файл запускался в background. Этого достаточно для демо, но не для настоящей production-системы, где процессы должны находиться под внешним управлением. Используя знания из лекции по systemd, создайте самостоятельно простой unit-файл для node_exporter:
-#### 1. поместите его в автозагрузку,  
-#### 2. предусмотрите возможность добавления опций к запускаемому процессу через внешний файл (посмотрите, например, на systemctl cat cron),  
-#### 3. удостоверьтесь, что с помощью systemctl процесс корректно стартует, завершается, а после перезагрузки автоматически поднимается.  
+### 1. поместите его в автозагрузку,  
+### 2. предусмотрите возможность добавления опций к запускаемому процессу через внешний файл (посмотрите, например, на systemctl cat cron),  
+### 3. удостоверьтесь, что с помощью systemctl процесс корректно стартует, завершается, а после перезагрузки автоматически поднимается.  
 
 На картинке ниже открыта в браузере на локальной машине страница http://127.0.0.53:9100/metrics (тот же вывод для localhost) + конфигурация node_exporter:  
 ![Вывод node_exporter](https://github.com/Bura-M/devops-netology/blob/main/03-sysadmin-04-os/img/node_exporter.PNG "node_exporter web")  
+
+_Изменения в Systemd Unit_  
+
+	nano /etc/systemd/system/node_exporter.service
+	[Unit]
+	Description=Prometheus Node Exporter
+	Wants=network-online.target
+	After=network-online.target
+
+	[Service]
+	User=node_exporter
+	Group=node_exporter
+	Type=simple
+	EnvironmentFile=-/etc/default/node_exporter
+	ExecStart=/usr/local/bin/node_exporter $EXTRA_OPTS
+
+	[Install]
+	WantedBy=multi-user.target
 
 На картинке ниже результаты запуска и остановки службы node_exporter:  
 ![Вывод ne_stopstart](https://github.com/Bura-M/devops-netology/blob/main/03-sysadmin-04-os/img/ne_stopstart.PNG "node_exporter stop&start")  
@@ -39,8 +57,8 @@ node_disk_read_bytes_total{device="sda"} 2.56234496e+08
 node_disk_write_time_seconds_total{device="sda"} 5.63  
 
 ### 3. Установите в свою виртуальную машину Netdata. Воспользуйтесь готовыми пакетами для установки (sudo apt install -y netdata). После успешной установки:
-#### * в конфигурационном файле /etc/netdata/netdata.conf в секции [web] замените значение с localhost на bind to = 0.0.0.0,
-#### * добавьте в Vagrantfile проброс порта Netdata на свой локальный компьютер и сделайте vagrant reload:
+### * в конфигурационном файле /etc/netdata/netdata.conf в секции [web] замените значение с localhost на bind to = 0.0.0.0,
+### * добавьте в Vagrantfile проброс порта Netdata на свой локальный компьютер и сделайте vagrant reload:
 ![Вывод netdata](https://github.com/Bura-M/devops-netology/blob/main/03-sysadmin-04-os/img/netdata.PNG "netdata web")  
 
 ### 4. Можно ли по выводу dmesg понять, осознает ли ОС, что загружена не на настоящем оборудовании, а на системе виртуализации?  
