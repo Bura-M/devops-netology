@@ -60,5 +60,6 @@ __Добавление статических маршрутов (ip route add):
 
 ![lsof UDP](https://github.com/Bura-M/devops-netology/blob/main/03-sysadmin-08-net/img/lsof_UDP.PNG)  
 
-### 5. Используя diagrams.net, создайте L3 диаграмму вашей домашней сети или любой другой сети, с которой вы работали.
-![L3](https://github.com/Bura-M/devops-netology/blob/main/03-sysadmin-08-net/img/L3.PNG)  
+### 5. Используя diagrams.net, создайте L3 диаграмму вашей домашней сети или любой другой сети, с которой вы работали.  
+Диаграмма домашней сети:  
+![L3](https://github.com/Bura-M/devops-netology/blob/main/03-sysadmin-08-net/img/L3.png)  
