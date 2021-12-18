@@ -70,7 +70,8 @@ bond_miimon 100 - частота мониторинга в мс, с которо
 bond_downdelay 200 - в мс, должно быть кратно miimon. Устанавливает время ожидания до отключения интерфейса в случае невозможности установить соединение  
 bond_updelay 200 - в мс, должно быть кратно miimon. Устанавливает время ожидания до включения интерфейса после восстановления подключения  
         
-Настроцка bond:  
+Настройка bond:  
+
 	sudo modprobe bonding  
 	sudo apt-get install ifenslave  
 	sudo ip link add bond0 type bond mode 802.3ad  
